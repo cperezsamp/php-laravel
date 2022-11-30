@@ -1,7 +1,8 @@
 <?php
 
 //importamos el controller de persona
-use App\Http\Controllers\PersonaController; 
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UsuarioController; 
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +22,14 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::view('/', 'login') ->name('login');
+Route::get('/registro', [UsuarioController::class, 'create']) ->name('usuario.create');
+Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.create');
+
+//si recibe datos
 Route::get('/index', [PersonaController::class ,'index'])->name('index');
 
 
+//si no recibe datos
 Route::get('/welcome', function () {
     return 'welcome';
 });

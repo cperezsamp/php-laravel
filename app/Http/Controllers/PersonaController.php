@@ -39,6 +39,7 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
+        
         DB::table('Personas')->get();
     }
 
