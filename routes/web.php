@@ -1,5 +1,7 @@
 <?php
 
+//importamos el controller de persona
+use App\Http\Controllers\PersonaController; 
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::get('/', function () {
+
+    return view('index');
+});*/
+
+Route::view('/', 'login') ->name('login');
+Route::get('/index', [PersonaController::class ,'index'])->name('index');
 
 
 Route::get('/welcome', function () {

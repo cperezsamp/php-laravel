@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class InscritoController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class InscritoController extends Controller
      */
     public function index()
     {
-        //
+        DB::table('Personas')->get();
     }
 
     /**
