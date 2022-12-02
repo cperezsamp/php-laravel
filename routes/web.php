@@ -31,6 +31,8 @@ Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.cr
 //Route::get('/', [PersonaController::class ,'index'])->name('index');
 
 Route::view('/', 'auth')->name('autenticado')->middleware('auth');
+Route::view('/usuario', 'usuario')->name('usuairo')->middleware('auth');
+Route::view('/ponente', 'ponente')->name('ponente')->middleware('auth');
 
 
 //si no recibe datos
