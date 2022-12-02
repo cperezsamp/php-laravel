@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\Persona;
 use App\Models\Tipo_usuario;
+use App\Models\User;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\Tipo_usuarioController;
 
@@ -49,10 +50,16 @@ class UsuarioController extends Controller
 
         $usuario= new Usuario;
         $usuario->Username= $persona->Nombre.$persona->Apellido1.$persona->Apellido2;
-        $usuario->Password= $request->input('password');
+        $usuario->Password= bcrypt($request->input('password'));
         $usuario->Id_Persona= (int)Persona::latest('Id_persona')->first()->Id_persona;
         $usuario->Id_tipo_usuario= $request->input('role');
         $usuario->save();
+
+        User::create([
+            'name' => $persona->Nombre.$persona->Apellido1.$persona->Apellido2,
+            'password' => bcrypt($request->input('password')), //$usuario->Password,
+            'Id_usuario' =>  (int)Usuario::latest('Id_usuario')->first()->Id_usuario,
+        ]);
         return to_route('login');
     }
 

@@ -11,4 +11,14 @@ class Usuario extends Model
 
     protected $table = 'Usuarios';
     public $timestamps= false;
+/*
+    protected $fillable = [
+        'Username',
+        'Password',
+    ];
+
+    protected $hidden = [
+        'password',
+        //'remember_token',
+    ];*/
 }
