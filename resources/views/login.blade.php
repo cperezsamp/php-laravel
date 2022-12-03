@@ -20,9 +20,9 @@
                     <p style="text-align: center; text-color: red">{{ $message }}</p>
                     <br>
                     @enderror
-                    Usuario: <input class="form-control" type="text" name="name" id="name">
+                    Usuario: <input class="form-control" type="text" name="name" id="name" required>
                     <br>
-                    Contraseña: <input class="form-control" type="password" name="password" id="password">
+                    Contraseña: <input class="form-control" type="password" name="password" id="password" required>
                     <br>
                     <br>
                     <input type="checkbox" name="recuerdame"><span class= "m-2">Recordarme</span>

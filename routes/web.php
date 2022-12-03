@@ -27,6 +27,9 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('l
 Route::get('/registro', [UsuarioController::class, 'create']) ->name('usuario.create');
 Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.create');
 
+Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.update');
+Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.update');
+
 //si recibe datos
 //Route::get('/', [PersonaController::class ,'index'])->name('index');
 

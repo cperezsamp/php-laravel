@@ -33,6 +33,8 @@ class AuthenticatedSessionController extends Controller
         $rol= DB::table('Tipos_usuarios')->where('Id_tipo_usuario', $usuario->Id_tipo_usuario)->first();
         $request->session()->regenerate();
         session(['rol'=> $rol->Descripcion ]);
+        session(['id_usuario'=> $usuario->Id_usuario ]);
+        session(['username'=> $usuario->Username ]);
         switch($rol->Descripcion){
             case 'Usuario':
                 return redirect()->intended('/usuario');        
