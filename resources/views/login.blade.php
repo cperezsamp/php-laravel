@@ -14,19 +14,29 @@
     <div class="bd-example m-5">
         <div class= "d-flex justify-content-center bd-highlight mb-3">
             <div class="card p-5">
-                <form action="login.php" method="post">
-                    Usuario: <input class="form-control" type="text" name="user">
+                <form action="{{ route('login') }}" method="post">
+                    @csrf
+                    @error('incorrect')
+                    <p style="text-align: center; text-color: red">{{ $message }}</p>
                     <br>
-                    Contraseña: <input class="form-control" type="password" name="password">
+                    @enderror
+                    Usuario: <input class="form-control" type="text" name="name" id="name" required>
+                    <br>
+                    Contraseña: <input class="form-control" type="password" name="password" id="password" required>
+                    <br>
+                    <br>
+                    <input type="checkbox" name="recuerdame"><span class= "m-2">Recordarme</span>
+                    <br>
                     <br>
                     <input type="submit" class="btn btn-primary col-md-6 offset-md-3" value="Entrar">
+                    
                 </form>
             </div>
         </div>
         <div class= "d-flex justify-content-center bd-highlight m-5">
             <div class="card p-5">
                 <p>¿No estas registrado?</p>
-                <button class="btn btn-info" onclick="location='register.php'">Registrarse</button>
+                <button class="btn btn-info" onclick="window.location='{{ route("usuario.create") }}'" >Registrarse</button>
             </div>
         </div>
     </div>

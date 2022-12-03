@@ -5,9 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuairo extends Model
+class Usuario extends Model
 {
     use HasFactory;
 
     protected $table = 'Usuarios';
+    public $timestamps= false;
+/*
+    protected $fillable = [
+        'Username',
+        'Password',
+    ];
+
+    protected $hidden = [
+        'password',
+        //'remember_token',
+    ];*/
 }
