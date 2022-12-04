@@ -44,9 +44,16 @@ Route::get('/welcome', function () {
 });
 
 //Admin
-Route::prefix('admin')->group(function(){
 
-    Route::get('/dashboard', [app\Http\Controller\Admin\DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 
-});
+
+
+
+
+
+
+
+//Route::prefix('admin')->group(function(){
+//});
