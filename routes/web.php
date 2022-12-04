@@ -42,3 +42,11 @@ Route::view('/ponente', 'ponente')->name('ponente')->middleware('auth');
 Route::get('/welcome', function () {
     return 'welcome';
 });
+
+//Admin
+Route::prefix('admin')->group(function(){
+
+    Route::get('/dashboard', [app\Http\Controller\Admin\DashboardController::class, 'index']);
+
+
+});
