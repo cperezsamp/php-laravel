@@ -30,14 +30,18 @@ class AuthenticatedSessionController extends Controller
         //return "ok";
         $user= DB::table('users')->where('name', $request->input('name'))->first();
         $usuario= DB::table('Usuarios')->where('Id_usuario', $user->id_usuario)->first();
+        //$usuario= DB::table('Usuarios')->where('Id_usuario', $user->id_usuario)->first();
         $rol= DB::table('Tipos_usuarios')->where('Id_tipo_usuario', $usuario->Id_tipo_usuario)->first();
         $request->session()->regenerate();
         session(['rol'=> $rol->Descripcion ]);
         session(['id_usuario'=> $usuario->Id_usuario ]);
+        session(['id_persona'=> $usuario->Id_Persona ]);
         session(['username'=> $usuario->Username ]);
+       
         switch($rol->Descripcion){
             case 'Usuario':
-                return redirect()->intended('/usuario');        
+                //return redirect()->intended('/usuario');
+                return redirect()->action([ActoController::class, 'index']);
                 break;
             case 'Ponente':
                 return redirect()->intended('/ponente');

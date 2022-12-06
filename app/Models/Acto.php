@@ -10,4 +10,5 @@ class Acto extends Model
     use HasFactory;
 
     protected $table = 'Actos';
+    public $timestamps= false;
 }

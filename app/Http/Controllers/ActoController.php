@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Acto;
+use App\Models\Inscrito;
+use DB;
+use Arr;
 
 class ActoController extends Controller
 {
@@ -11,9 +15,33 @@ class ActoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        if ($request->input('mostrarVista')===null or $request->input('mostrarVista')==='3') {
+            $botonClicado = $request->input('mostrarVista');
+            $currentMonth = date('m');
+            $actos = DB::table("Actos")
+            ->whereRaw('MONTH(Fecha) = ?',[$currentMonth])
+            ->get();
+        }else if ($request->input('mostrarVista')==='2') {
+            $botonClicado = $request->input('mostrarVista');
+            $startDate = date('Y-m-d');
+            $endDate = date('Y-m-d H:i:s', strtotime("7 days"));
+            $actos = Acto::query()
+                    ->whereDate('Fecha', '>=', $startDate)
+                    ->whereDate('Fecha', '<=', $endDate)
+                    ->get();
+        }else if ($request->input('mostrarVista')==='1') {
+            $botonClicado = $request->input('mostrarVista');
+            $dia = date('Y-m-d');
+            $actos = Acto::query()
+            ->where('Fecha', '=', $dia)
+            ->get();
+        }
+        
+        //return View::make('usuario')->with('actos', $actos);
+        return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]);
     }
 
     /**
@@ -80,5 +108,55 @@ class ActoController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public static function colorButtonInscribirse($idActo)
+    {
+        $colorBoton= DB::table('Inscritos')->where('Id_acto', $idActo)->first();
+        return $colorBoton;
+    }
+    
+    public static function inscribirseBorrarse(Request $request)
+    {
+        $botonClicado = '-1';
+        if ($request->input('inscribirBorrar') === 'borrarse') {
+            $borrado = DB::table('Inscritos')->where('Id_persona', '=', $request->input('id_persona'))->where('id_acto', '=', $request->input('id_acto'))->delete();
+            if ($borrado == 1) {
+                $affected = DB::table('Actos')
+                ->where('Id_acto', $request->input('id_acto'))
+                ->update([
+                    'Num_asistentes' => DB::raw('Num_asistentes - 1')
+                ]);
+                echo "<script>alert('Te has borrado correctamente del acto')</script>";
+            }else{
+                echo "<script>alert('Ha habido algun fallo al borrarte del acto')</script>";
+            }
+        }else{
+            $insercion = DB::table('Inscritos')->insert([
+                ['Id_persona' => $request->input('id_persona'), 'id_acto' => $request->input('id_acto'), 'Fecha_inscripcion' => date('Y-m-d H:i:s')]
+            ]);
+            if ($insercion == 1) {
+                $affected = DB::table('Actos')
+                            ->where('Id_acto', $request->input('id_acto'))
+                            ->update([
+                                'Num_asistentes' => DB::raw('Num_asistentes + 1')
+                            ]);
+                echo "<script>alert('Te has inscrito correctamente en el acto')</script>";
+            }else{
+                echo "<script>alert('Ha habido algun fallo al inscribirte en el acto acto')</script>";
+            } 
+        }
+        
+        $actos = Acto::get();
+        return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]); 
+    }
+    
+    public static function mostrarEvento(Request $request)
+    {
+        $acto = Acto::query()
+        ->where('Id_acto', '=', $request->input('id_acto'))
+        ->get();
+        //return View::make('usuario')->with('actos', $actos);
+        return view('vistaEvento', ['acto' => $acto]);
     }
 }
