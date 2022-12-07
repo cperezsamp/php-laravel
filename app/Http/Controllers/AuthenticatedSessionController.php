@@ -52,4 +52,22 @@ class AuthenticatedSessionController extends Controller
         }
         //return redirect()->intended('/');
     }
+
+    public function destroy(Request $requests){
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return to_route('login');
+
+    }
+
+    public function logout () {
+        //logout user
+        auth()->logout();
+        // redirect to homepage
+        return redirect('/login');
+    }
+    
 }

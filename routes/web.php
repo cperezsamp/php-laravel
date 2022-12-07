@@ -32,6 +32,7 @@ Route::get('/inscBorr', [ActoController::class, 'inscribirseBorrarse']) ->name('
 Route::get('/verEvento', [ActoController::class, 'mostrarEvento']) ->name('verEvento');
 Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.update')->middleware('auth');
 Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.upd')->middleware('auth');
+Route::get('/logout', [AuthenticatedSessionController::class, 'logout']) ->name('logout')->middleware('auth');
 
 //si recibe datos
 //Route::get('/', [PersonaController::class ,'index'])->name('index');
