@@ -30,8 +30,8 @@ Route::get('/registro', [UsuarioController::class, 'create']) ->name('usuario.cr
 Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.crea');
 Route::get('/inscBorr', [ActoController::class, 'inscribirseBorrarse']) ->name('inscribirseBorrarse');
 Route::get('/verEvento', [ActoController::class, 'mostrarEvento']) ->name('verEvento');
-Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.update');
-Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.upd');
+Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.update')->middleware('auth');
+Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.upd')->middleware('auth');
 
 //si recibe datos
 //Route::get('/', [PersonaController::class ,'index'])->name('index');

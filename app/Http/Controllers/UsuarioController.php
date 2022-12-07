@@ -96,33 +96,31 @@ class UsuarioController extends Controller
      */
     public function update(Request $request) //$id)
     {
-        return $request;
-        session('id_usuario'); ///recupera la id del usuario autenticado.
-
+  
         //comprobamos que el nombre no este en uso
         $names= DB::table('users')->select('name')->get();
         foreach($names as $name){
-            if($name == $reques->input('username')){
+            if($name == $request->input('username')){
                 throw ValidationException::withMessages([
                     'incorrect' => 'El nombre de usuario ya esta en uso.',
                 ]);
             }
         } 
-        $user= DB::table('users')->where('Id_usuario', $usuario->Id_usuario)->first();
+        $user= new User;
+        $usuario= new Usuario;
+        $user= DB::table('users')->where('Id_usuario', session('id_usuario'))->first();
         $usuario= DB::table('Usuarios')->where('Id_usuario', session('id_usuario'))->first();
         if($request->username!= null){
-            $usuario->Username= $request->input('username');
-            $user->name= $request->input('username');    
+            DB::table('Usuarios')->where('Id_usuario', session('id_usuario'))->update(['Username' => $request->input('username')]);
+            DB::table('users')->where('Id_usuario', session('id_usuario'))->update(['name' => $request->input('username')]);   
         }
         if($request->password!= null){
-            $usuario->Password= bcrypt($request->input('password'));
-            $user->password= bcrypt($request->input('password'));
+            DB::table('Usuarios')->where('Id_usuario', session('id_usuario'))->update(['Password' => bcrypt($request->input('password'))]);
+            DB::table('users')->where('Id_usuario', session('id_usuario'))->update(['password' => bcrypt($request->input('password'))]);
         }
         $idTipo= DB::table('Tipos_usuarios')->where('Descripcion', session('rol'))->first();
-        $usuario->Id_tipo_tipo_usuario= $idTipo->Id_tipo_usuario;
-        $usuario->save();
-        $user->save();
-        
+        DB::table('Usuarios')->where('Id_usuario', session('id_usuario'))->update(['Id_tipo_usuario' => $idTipo->Id_tipo_usuario]);
+       
         return redirect()->intended('/usuario');
          
     }
