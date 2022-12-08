@@ -34,6 +34,11 @@ Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.updat
 Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.upd')->middleware('auth');
 Route::get('/logout', [AuthenticatedSessionController::class, 'logout']) ->name('logout')->middleware('auth');
 
+Route::get('/admin', [ActoController::class, 'admin']) ->name('admin');
+Route::get('/crearacto', [ActoController::class, 'create']) ->name('crearacto');
+Route::post('/crearacto', [ActoController::class, 'store']) ->name('crearacto');
+Route::get('/editaracto', [ActoController::class, 'edit']) ->name('editaracto');
+
 //si recibe datos
 //Route::get('/', [PersonaController::class ,'index'])->name('index');
 

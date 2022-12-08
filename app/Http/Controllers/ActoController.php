@@ -51,7 +51,7 @@ class ActoController extends Controller
      */
     public function create()
     {
-        //
+        return view('crearacto');
     }
 
     /**
@@ -62,7 +62,17 @@ class ActoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        $acto= new Acto;
+        $acto->Fecha= $request->fecha;
+        $acto->Hora= $request->hora;
+        $acto->Titulo= $request->titulo;
+        $acto->Descripcion_corta= $request->descripcionc;
+        $acto->Descripcion_larga= $request->descripcionl;
+        $acto->Num_asistentes= $request->nasistentes;
+        $acto->Id_tipo_acto= $request->tipo_acto;
+        $acto->save();
+        return redirect('admin');
     }
 
     /**
@@ -82,9 +92,9 @@ class ActoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -158,5 +168,16 @@ class ActoController extends Controller
         ->get();
         //return View::make('usuario')->with('actos', $actos);
         return view('vistaEvento', ['acto' => $acto]);
+    }
+
+    public function admin(){
+        //return ('in function');
+        $actos= DB::table('Actos')->get();
+        //return $actos;
+        return view('admin', ['actos' => $actos]);
+    }
+
+    public function editarActo(Request $request){
+
     }
 }

@@ -11,12 +11,7 @@
     <title>Gestor de Eventos</title>
 </head>
 <body>
-    <!--<a title="Cerrar sesion" href="logout" style= 'text-align: right'><?php echo "<p>Cerrar sesion</p>" ;?></a>-->
-    <!--<form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" style= 'text-align: right'>Cerrar sesion</button>
-    </form>-->
-    <a href="{{ url('/logout')}}">Cerrar sesion</a>
+    <a href="{{ url('/logout')}}" style= 'text-align: right'><p>Cerrar sesion</p></a>
     <a title="Ir al perfil" href="profile" style= 'text-align: right'><p>{{ session('username') }}</p></a><br>
 
 {{ $slot }}

@@ -47,7 +47,7 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->intended('/ponente');
                 break;
             case 'Administrador':
-                return redirect()->intended('/');
+                return redirect()->action([ActoController::class, 'admin']);
                 break;
         }
         //return redirect()->intended('/');
@@ -64,9 +64,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function logout () {
-        //logout user
         auth()->logout();
-        // redirect to homepage
         return redirect('/login');
     }
     
