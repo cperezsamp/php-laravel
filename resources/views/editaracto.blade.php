@@ -4,8 +4,9 @@
 <div class="bd-example m-5">
     <div class= "d-flex justify-content-center bd-highlight mb-3">
         <div class="card p-5">
-            <form action="crearacto" method="POST">
+            <form action="editaracto" method="POST">
                 @csrf
+                <input type="hidden" name="id_acto" value="{{ $acto->Id_acto }}">
                 <label for="fecha">Fecha: {{ $acto->Fecha }}</label>
                 <input class="form-control" type="date" name="fecha" id="fecha" required placeholder="{{ $acto->Fecha }}">
                 <br>

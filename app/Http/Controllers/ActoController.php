@@ -179,6 +179,23 @@ class ActoController extends Controller
     }
 
     public function editarActo(Request $request){
+        //return $request;
+        DB::table('Actos')->where('Id_acto', $request->id_acto)->update([
+            'Fecha' => $request->fecha,
+            'Hora' => $request->hora,
+            'Titulo' => $request->titulo,
+            'Descripcion_corta' => $request->descripcionc,
+            'Descripcion_larga' => $request->descripcionl,
+            'Num_asistentes' => $request->nasistentes,
+            'Id_tipo_acto' => $request->tipo_acto                    
+        ]);
+        /*DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Hora' => $request->hora]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Titulo' => $request->titulo]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Descripcion_corta' => $request->descripcionc]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Descripcion_larga' => $request->descripcionl]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Num_asistentes' => $request->nasistentes]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Id_tipo_acto' => $request->tipo_acto]);*/
+        return redirect('/admin');
 
     }
 }
