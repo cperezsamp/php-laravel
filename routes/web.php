@@ -39,6 +39,7 @@ Route::get('/crearacto', [ActoController::class, 'create']) ->name('crearacto');
 Route::post('/crearacto', [ActoController::class, 'store']) ->name('crearacto');
 Route::get('/editaracto', [ActoController::class, 'edit']) ->name('editaracto');
 Route::post('/editaracto', [ActoController::class, 'editarActo']) ->name('editaracto');
+Route::get('/inscritos', [ActoController::class, 'inscritos']) ->name('inscritos');
 
 //si recibe datos
 //Route::get('/', [PersonaController::class ,'index'])->name('index');
