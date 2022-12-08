@@ -94,7 +94,8 @@ class ActoController extends Controller
      */
     public function edit(Request $request)
     {
-        return $request;
+        $acto= DB::table('Actos')->where('Id_acto', '=', $request->id_acto  )->get()->first();
+        return view('editaracto', ['acto' => $acto]);
     }
 
     /**

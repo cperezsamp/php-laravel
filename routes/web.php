@@ -25,7 +25,7 @@ use App\Http\Controllers\PonenteController;
 
 Route::view('/login', 'login') ->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('log');
-Route::get('/usuario', [ActoController::class, 'index']) ->name('usuario');
+Route::get('/usuario', [ActoController::class, 'index']) ->name('usuario')->middleware('auth');
 Route::get('/registro', [UsuarioController::class, 'create']) ->name('usuario.create');
 Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.crea');
 Route::get('/inscBorr', [ActoController::class, 'inscribirseBorrarse']) ->name('inscribirseBorrarse');
@@ -47,7 +47,7 @@ Route::view('/', 'auth')->name('autenticado')->middleware('auth');
 //Route::view('/ponente', 'ponente')->name('ponente')->middleware('auth');
 
 
-Route::get('/ponente', [PonenteController::class, 'index'])->middleware('ValidateRequest');
+Route::get('/ponente', [PonenteController::class, 'index'])->middleware('auth');
 Route::post('/hanldeButton', [PonenteController::class, 'hanldeButton'])->middleware('ValidateRequest');
 Route::post('/event_detail', [PonenteController::class, 'event_detail'])->middleware('ValidateRequest');
 Route::post('/removeSpeaker', [PonenteController::class, 'removeSpeaker'])->middleware('ValidateRequest');

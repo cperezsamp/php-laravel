@@ -1,5 +1,7 @@
 @extends("layout.layout")
-
+@if (session('rol') == 'Usuario')
+<script>window.location = "/usuario";</script>
+@endif
 @section("content")
     <div align="center">
         <form action="{{ URL('/hanldeButton') }}" method="post">
