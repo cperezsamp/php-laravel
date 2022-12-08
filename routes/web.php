@@ -6,7 +6,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthenticatedSessionController; 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActoController;
-
+use App\Http\Controllers\PonenteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +39,15 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'logout']) ->name(
 
 Route::view('/', 'auth')->name('autenticado')->middleware('auth');
 //Route::view('/usuario', 'usuario')->name('usuario')->middleware('auth');
-Route::view('/ponente', 'ponente')->name('ponente')->middleware('auth');
+//Route::view('/ponente', 'ponente')->name('ponente')->middleware('auth');
+
+
+Route::get('/ponente', [PonenteController::class, 'index'])->middleware('ValidateRequest');
+Route::post('/hanldeButton', [PonenteController::class, 'hanldeButton'])->middleware('ValidateRequest');
+Route::post('/event_detail', [PonenteController::class, 'event_detail'])->middleware('ValidateRequest');
+Route::post('/removeSpeaker', [PonenteController::class, 'removeSpeaker'])->middleware('ValidateRequest');
+Route::get('/user-profile', [PonenteController::class, 'profile'])->middleware('ValidateRequest');
+Route::post('/update_profile', [PonenteController::class, 'update_profile'])->middleware('ValidateRequest');
 
 
 //si no recibe datos

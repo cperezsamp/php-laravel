@@ -35,8 +35,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         session(['rol'=> $rol->Descripcion ]);
         session(['id_usuario'=> $usuario->Id_usuario ]);
-        session(['id_persona'=> $usuario->Id_Persona ]);
         session(['username'=> $usuario->Username ]);
+        session(['persona'=> $usuario->Id_Persona ]);
+        session(["tipoVista"=> ""]);
        
         switch($rol->Descripcion){
             case 'Usuario':
@@ -67,6 +68,13 @@ class AuthenticatedSessionController extends Controller
         //logout user
         auth()->logout();
         // redirect to homepage
+        $req->session()->forget("rol");
+        $req->session()->forget("id_usuario");
+        $req->session()->forget("username");
+        $req->session()->forget("persona");
+        $req->session()->forget("tipoVista");
+        $req->session()->reflash();
+        
         return redirect('/login');
     }
     
