@@ -159,7 +159,8 @@ class ActoController extends Controller
         }
         
         $actos = Acto::get();
-        return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]); 
+        //return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]);
+        return redirect('usuario'); 
     }
     
     public static function mostrarEvento(Request $request)
@@ -195,11 +196,54 @@ class ActoController extends Controller
     public function inscritos(Request $request){
         //return $request;
         $acto= DB::table('Inscritos')->where('Id_acto', '=', $request->id_acto)->get();
-        return $acto;
-        return view('inscritos', ['acto', $acto]);
+        //return $acto;
+        return view('inscritos', ['acto'=> $acto]);
     }
 
     public function modificarInscritos(Request $request){
+        
+    }
 
+    //funciones de la api
+
+    public function apiGetActos(Request $request){
+        $actos= Acto::all();
+        return $actos;
+    }
+
+    public function apiGetActo(Request $request){
+        $acto= Acto::findOrFail($request->id);
+        return $acto;
+    }
+
+    public function apiCreateActo(Request $request){
+        $acto= new Acto;
+        $acto->Fecha= $request->fecha;
+        $acto->Hora= $request->hora;
+        $acto->Titulo= $request->titulo;
+        $acto->Descripcion_corta= $request->descripcionc;
+        $acto->Descripcion_larga= $request->descripcionl;
+        $acto->Num_asistentes= $request->nasistentes;
+        $acto->Id_tipo_acto= $request->tipo_acto;
+        $acto->save();
+        return $acto;
+    }
+
+    public function apiDeleteActo(Request $request){
+        $acto= Acto::destroy($request->id);
+        return $acto;
+    }
+
+    public function apiUpdateActo(Request $request){
+        $acto= Acto::findOrFail($request->id);
+        $acto->Fecha= $request->fecha;
+        $acto->Hora= $request->hora;
+        $acto->Titulo= $request->titulo;
+        $acto->Descripcion_corta= $request->descripcionc;
+        $acto->Descripcion_larga= $request->descripcionl;
+        $acto->Num_asistentes= $request->nasistentes;
+        $acto->Id_tipo_acto= $request->tipo_acto;
+        $acto->save();
+        return $acto;
     }
 }

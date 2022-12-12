@@ -7,7 +7,7 @@
 <x-layout.header> 
 Bienvenido {{ session('username') }}
 
-<div align="center">
+<div text-align="center">
 	<button class="btn btn-primary" name="crearActo" onclick="window.location='{{ route("crearacto") }}'">Crear Acto</button>
 	<br>
     <br>
