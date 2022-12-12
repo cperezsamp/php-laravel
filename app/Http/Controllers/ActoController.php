@@ -51,7 +51,7 @@ class ActoController extends Controller
      */
     public function create()
     {
-        //
+        return view('crearacto');
     }
 
     /**
@@ -62,7 +62,17 @@ class ActoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        $acto= new Acto;
+        $acto->Fecha= $request->fecha;
+        $acto->Hora= $request->hora;
+        $acto->Titulo= $request->titulo;
+        $acto->Descripcion_corta= $request->descripcionc;
+        $acto->Descripcion_larga= $request->descripcionl;
+        $acto->Num_asistentes= $request->nasistentes;
+        $acto->Id_tipo_acto= $request->tipo_acto;
+        $acto->save();
+        return redirect('admin');
     }
 
     /**
@@ -82,9 +92,10 @@ class ActoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $acto= DB::table('Actos')->where('Id_acto', '=', $request->id_acto  )->get()->first();
+        return view('editaracto', ['acto' => $acto]);
     }
 
     /**
@@ -158,5 +169,33 @@ class ActoController extends Controller
         ->get();
         //return View::make('usuario')->with('actos', $actos);
         return view('vistaEvento', ['acto' => $acto]);
+    }
+
+    public function admin(){
+        //return ('in function');
+        $actos= DB::table('Actos')->get();
+        //return $actos;
+        return view('admin', ['actos' => $actos]);
+    }
+
+    public function editarActo(Request $request){
+        //return $request;
+        DB::table('Actos')->where('Id_acto', $request->id_acto)->update([
+            'Fecha' => $request->fecha,
+            'Hora' => $request->hora,
+            'Titulo' => $request->titulo,
+            'Descripcion_corta' => $request->descripcionc,
+            'Descripcion_larga' => $request->descripcionl,
+            'Num_asistentes' => $request->nasistentes,
+            'Id_tipo_acto' => $request->tipo_acto                    
+        ]);
+        /*DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Hora' => $request->hora]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Titulo' => $request->titulo]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Descripcion_corta' => $request->descripcionc]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Descripcion_larga' => $request->descripcionl]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Num_asistentes' => $request->nasistentes]);
+        DB::table('Actos')->where('Id_acto', $request->Id_acto)->update(['Id_tipo_acto' => $request->tipo_acto]);*/
+        return redirect('/admin');
+
     }
 }

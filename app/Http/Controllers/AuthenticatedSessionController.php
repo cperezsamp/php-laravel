@@ -35,8 +35,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         session(['rol'=> $rol->Descripcion ]);
         session(['id_usuario'=> $usuario->Id_usuario ]);
-        session(['id_persona'=> $usuario->Id_Persona ]);
         session(['username'=> $usuario->Username ]);
+        session(['persona'=> $usuario->Id_Persona ]);
+        session(["tipoVista"=> ""]);
        
         switch($rol->Descripcion){
             case 'Usuario':
@@ -47,7 +48,7 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->intended('/ponente');
                 break;
             case 'Administrador':
-                return redirect()->intended('/');
+                return redirect()->action([ActoController::class, 'admin']);
                 break;
         }
         //return redirect()->intended('/');
@@ -64,9 +65,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function logout () {
-        //logout user
         auth()->logout();
-        // redirect to homepage
         return redirect('/login');
     }
     
