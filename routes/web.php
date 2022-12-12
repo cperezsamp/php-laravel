@@ -28,8 +28,8 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('l
 Route::get('/usuario', [ActoController::class, 'index']) ->name('usuario');
 Route::get('/registro', [UsuarioController::class, 'create']) ->name('usuario.create');
 Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.crea');
-Route::get('/inscBorr', [ActoController::class, 'inscribirseBorrarse']) ->name('inscribirseBorrarse');
-Route::get('/verEvento', [ActoController::class, 'mostrarEvento']) ->name('verEvento');
+Route::post('/inscBorr', [ActoController::class, 'inscribirseBorrarse']) ->name('inscribirseBorrarse');
+Route::post('/verEvento', [ActoController::class, 'mostrarEvento']) ->name('verEvento');
 Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.update')->middleware('auth');
 Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.upd')->middleware('auth');
 Route::get('/logout', [AuthenticatedSessionController::class, 'logout']) ->name('logout')->middleware('auth');

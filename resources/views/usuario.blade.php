@@ -58,14 +58,16 @@ Bienvenido {{ session('username') }}
 				<td>{{ $acto->Fecha }}</td>
 				<td>{{ $acto->Hora }}</td>
 				@if ($datosBoton === null)
-                <td><form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="GET">
+                <td><form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
+                		@csrf
 						<input name="id_acto" type="hidden" value="{{ $acto->Id_acto }}">
 						<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
 						<button type="submit" name="inscribirBorrar" value="inscribirse" class="btn btn-primary">Inscribirse</button>
 					</form>
 				</td>
                 @else
-                    <td><form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="GET">
+                    <td><form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
+                    	@csrf
 						<input name="id_acto" type="hidden" value="{{ $acto->Id_acto }}">
 						<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
 						<button type="submit" name="inscribirBorrar" value="borrarse" class="btn btn-warning">Borrarse</button>
@@ -73,7 +75,8 @@ Bienvenido {{ session('username') }}
 				</td>
                 @endif
 				
-				<td><form action="{{ action('App\Http\Controllers\ActoController@mostrarEvento') }}" method="GET">
+				<td><form action="{{ action('App\Http\Controllers\ActoController@mostrarEvento') }}" method="POST">
+						@csrf
 						<input name="id_acto" type="hidden" value="{{ $acto->Id_acto }}">
 						<button type="submit" class="btn btn-primary">Ver evento</button>
 
