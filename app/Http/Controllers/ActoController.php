@@ -43,6 +43,18 @@ class ActoController extends Controller
         //return View::make('usuario')->with('actos', $actos);
         return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]);
     }
+    
+    public function vistaInicial(Request $request)
+    {
+        $currentMonth = date('m');
+        $actos = DB::table("Actos")->orderBy('fecha', 'asc')->get();
+        return view('eventos_principal', ['actos' => $actos]);
+    }
+    
+    public function doLogin()
+    {
+        return view('login');
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -15,8 +15,15 @@
 	@endforeach
 	<tr>
     	<td>
-    	<form action="{{ action('App\Http\Controllers\ActoController@index') }}" method="GET"> 
-           <button type="submit" name="mostrarEvento"  class="btn btn-primary">Volver a eventos</button></form>
+    	<form action="{{ action('App\Http\Controllers\ActoController@index') }}" method="GET">
+    		@csrf 
+           <button type="submit" name="mostrarEvento" class="btn btn-primary">Volver a eventos</button>
+        </form>
+        <br>
+        <form action="{{ action('App\Http\Controllers\ActoController@doLogin') }}" method="POST"> 
+        	@csrf
+           <button type="submit" name="Inscribirse" class="btn btn-success">Inscribirse</button>
+        </form>
         </td
     </tr>
 </table>

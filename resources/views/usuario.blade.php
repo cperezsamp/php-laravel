@@ -61,7 +61,7 @@ Bienvenido {{ session('username') }}
                 <td><form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
                 		@csrf
 						<input name="id_acto" type="hidden" value="{{ $acto->Id_acto }}">
-						<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
+						<input name="id_persona" type="hidden" value="{{ session('persona') }}">
 						<button type="submit" name="inscribirBorrar" value="inscribirse" class="btn btn-primary">Inscribirse</button>
 					</form>
 				</td>
@@ -69,7 +69,7 @@ Bienvenido {{ session('username') }}
                     <td><form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
                     	@csrf
 						<input name="id_acto" type="hidden" value="{{ $acto->Id_acto }}">
-						<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
+						<input name="id_persona" type="hidden" value="{{ session('persona') }}">
 						<button type="submit" name="inscribirBorrar" value="borrarse" class="btn btn-warning">Borrarse</button>
 					</form>
 				</td>

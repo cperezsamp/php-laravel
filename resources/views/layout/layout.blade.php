@@ -12,28 +12,26 @@
 </head>
 <body>
     <div class="container">
-        
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ URL('/ponente')}}">Ponente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ URL('logout') }}">Cerrar sesion</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ URL('user-profile') }}">{{session("username")}}</a>
-          </li>
-        </ul>
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ URL('/ponente')}}">Ponente</a>
+              </li>
+              <li class="nav-item">
 
-            @if(!empty(session("msg")))
-
-                <p class="alert alert-info">{{session("msg")}}</p>
-
-            @endif  
-
-            @section("content")
-            @show
-
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ URL('user-profile') }}">{{session("username")}}</a>
+              </li>
+            </ul>
+    
+                @if(!empty(session("msg")))
+    
+                    <p class="alert alert-info">{{session("msg")}}</p>
+    
+                @endif  
+    
+                @section("content")
+                @show
 
             <footer class="text-center fixed-bottom container" style="background-color:#343a40;padding:10px;color:white">
                 UOC 2022
