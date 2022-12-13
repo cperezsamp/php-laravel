@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
         switch($rol->Descripcion){
             case 'Usuario':
                 //return redirect()->intended('/usuario');
-                return redirect()->action([ActoController::class, 'index']);
+                return redirect()->intended('/eventos_principal');
                 break;
             case 'Ponente':
                 return redirect()->intended('/ponente');

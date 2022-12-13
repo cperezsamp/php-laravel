@@ -22,7 +22,12 @@
         <br>
         <form action="{{ action('App\Http\Controllers\ActoController@doLogin') }}" method="POST"> 
         	@csrf
+        	@auth
            <button type="submit" name="Inscribirse" class="btn btn-success">Inscribirse</button>
+           @endauth
+           @guest
+           <button type="submit" name="Inscribirse" class="btn btn-success">Logearse</button>
+           @endguest
         </form>
         </td
     </tr>
