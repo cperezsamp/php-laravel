@@ -185,8 +185,8 @@ class PonenteController extends Controller
     {
         $persona = session("persona");
         $data =DB::Select(" 
-                                    Select * from personas p 
-                                    inner join usuarios u on u.Id_Persona = p.Id_persona  WHERE p.Id_persona = $persona");
+                                    Select * from Personas p 
+                                    inner join Usuarios u on u.Id_Persona = p.Id_persona  WHERE p.Id_persona = $persona");
         return view("user_profile")->with("data",current($data));
     }
 
