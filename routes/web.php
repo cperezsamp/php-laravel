@@ -26,11 +26,8 @@ use App\Http\Controllers\PonenteController;
 //Route::view('/usuario', 'eventos') ->name('eventos');
 //Route::view('/eventos_principal', 'eventos') ->name('eventos');
 Route::view('/login', 'login') ->name('login');
-<<<<<<< HEAD
 Route::get('/eventos_principal', [ActoController::class, 'vistaInicial']);
-=======
 Route::get('/', [ActoController::class, 'vistaInicial']);
->>>>>>> 16ce7307374b29adb8f7ab37593fceb062ca70e3
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('log');
 Route::post('/log', [ActoController::class, 'doLogin'])->name('doLog');
 Route::get('/usuario', [ActoController::class, 'index']) ->name('usuario')->middleware('auth');
