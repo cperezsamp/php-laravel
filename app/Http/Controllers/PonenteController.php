@@ -133,7 +133,7 @@ class PonenteController extends Controller
         if(!empty($req->inscribirBorrar))
         {
             $date = date('Y-m-d H:i:s');
-            $table= "inscritos";
+            $table= "Inscritos";
             $colums ="Id_persona,Id_acto,Fecha_inscripcion";
             $values ="$persona, $Id_acto,'$date'";
         }
