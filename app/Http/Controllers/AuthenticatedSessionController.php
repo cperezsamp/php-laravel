@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
         session(['rol'=> $rol->Descripcion ]);
         session(['id_usuario'=> $usuario->Id_usuario ]);
         session(['username'=> $usuario->Username ]);
-        session(['persona'=> $usuario->Id_Persona ]);
+        session(['id_persona'=> $usuario->Id_Persona ]);
         session(["tipoVista"=> ""]);
        
         switch($rol->Descripcion){

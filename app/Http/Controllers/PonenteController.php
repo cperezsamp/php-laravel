@@ -126,14 +126,14 @@ class PonenteController extends Controller
 
         if(!empty($req->esPonente))
         {
-            $table= "lista_ponentes";
+            $table= "Lista_Ponentes";
             $colums ="Id_persona,Id_acto,Orden";
             $values ="$persona, $Id_acto,1";
         }
         if(!empty($req->inscribirBorrar))
         {
             $date = date('Y-m-d H:i:s');
-            $table= "inscritos";
+            $table= "Inscritos";
             $colums ="Id_persona,Id_acto,Fecha_inscripcion";
             $values ="$persona, $Id_acto,'$date'";
         }
