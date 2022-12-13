@@ -24,9 +24,9 @@ use App\Http\Controllers\PonenteController;
 });*/
 
 //Route::view('/usuario', 'eventos') ->name('eventos');
-Route::view('/eventos_principal', 'eventos') ->name('eventos');
+//Route::view('/eventos_principal', 'eventos') ->name('eventos');
 Route::view('/login', 'login') ->name('login');
-Route::get('/eventos_principal', [ActoController::class, 'vistaInicial']) ->name('elmio');
+Route::get('/', [ActoController::class, 'vistaInicial']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('log');
 Route::post('/log', [ActoController::class, 'doLogin'])->name('doLog');
 Route::get('/usuario', [ActoController::class, 'index']) ->name('usuario')->middleware('auth');
@@ -48,7 +48,7 @@ Route::get('/inscritos', [ActoController::class, 'inscritos']) ->name('inscritos
 //si recibe datos
 //Route::get('/', [PersonaController::class ,'index'])->name('index');
 
-Route::view('/', 'auth')->name('autenticado')->middleware('auth');
+//Route::view('/', 'auth')->name('autenticado')->middleware('auth');
 //Route::view('/usuario', 'usuario')->name('usuario')->middleware('auth');
 //Route::view('/ponente', 'ponente')->name('ponente')->middleware('auth');
 
