@@ -41,8 +41,7 @@ class AuthenticatedSessionController extends Controller
        
         switch($rol->Descripcion){
             case 'Usuario':
-                //return redirect()->intended('/usuario');
-                return redirect()->intended('/eventos_principal');
+                return redirect()->intended('/');
                 break;
             case 'Ponente':
                 return redirect()->intended('/ponente');
@@ -64,7 +63,8 @@ class AuthenticatedSessionController extends Controller
 
     }
 
-    public function logout () {
+    public function logout(){
+        
         auth()->logout();
         return redirect('/login');
     }
