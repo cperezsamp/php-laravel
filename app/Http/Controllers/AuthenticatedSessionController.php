@@ -38,6 +38,7 @@ class AuthenticatedSessionController extends Controller
         session(['username'=> $usuario->Username ]);
         session(['id_persona'=> $usuario->Id_Persona ]);
         session(["tipoVista"=> ""]);
+        session(['Id_tipo_usuario'=> $usuario->Id_tipo_usuario ]);
        
         switch($rol->Descripcion){
             case 'Usuario':

@@ -13,5 +13,9 @@
 <body>
     <a href="{{ url('/logout')}}" style= 'text-align: right'><p>Cerrar sesion</p></a>
     <a title="Ir al perfil" href="profile" style= 'text-align: right'><p>{{ session('username') }}</p></a><br>
+    @if(session("Id_tipo_usuario") &&  (session("Id_tipo_usuario") == "1") )
+
+        <a title="Ir al perfil" href="{{ URL('event_file') }}" style= 'text-align: right'><p>Events File</p></a><br>
+    @endif
 
 {{ $slot }}
