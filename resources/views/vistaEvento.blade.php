@@ -12,6 +12,7 @@
     	<tr><td>Descripcion corta del evento -> {{ $a->Descripcion_corta }}</td></tr>
     	<tr><td>Descripcion larga del evento -> {{ $a->Descripcion_larga }}</td></tr>
     	<tr><td>Numero de asistentes del evento -> {{ $a->Num_asistentes }}</td></tr>
+    	<!-- <tr><td>id persona -> {{ session('id_persona') }}</td></tr> -->
 	@endforeach
 	<tr>
     	<td>
@@ -20,13 +21,33 @@
            <button type="submit" name="mostrarEvento" class="btn btn-primary">Volver a eventos</button>
         </form>
         <br>
-        <form action="{{ action('App\Http\Controllers\ActoController@doLogin') }}" method="POST"> 
-        	@csrf
+        
+        	
         	@auth
-           <button type="submit" name="Inscribirse" class="btn btn-success">Inscribirse</button>
+        	@php
+				$datosBoton = App\Http\Controllers\ActoController::colorButtonInscribirse($a->Id_acto);
+			@endphp
+			@if ($datosBoton === null)
+        		<form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
+        			@csrf
+            		<input name="id_acto" type="hidden" value="{{ $a->Id_acto }}">
+    				<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
+    				<button type="submit" name="inscribirBorrar" value="inscribirse" class="btn btn-primary">Inscribirse</button>
+				</form>
+           @else
+           		<form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
+        	@csrf
+					<input name="id_acto" type="hidden" value="{{ $a->Id_acto }}">
+					<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
+					<button type="submit" name="inscribirBorrar" value="borrarse" class="btn btn-warning">Borrarse</button>
+           		</form>
+           @endif
            @endauth
            @guest
-           <button type="submit" name="Inscribirse" class="btn btn-success">Logearse</button>
+           <form action="{{ action('App\Http\Controllers\ActoController@doLogin') }}" method="POST">
+           @csrf 
+           <button type="submit" name="logearse" class="btn btn-success">Logearse</button>
+           </form>
            @endguest
         </form>
         </td

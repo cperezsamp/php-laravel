@@ -37,8 +37,8 @@ class PonenteController extends Controller
             foreach ($this->data as $acto) {
                 
                 $Id_acto = $acto->Id_acto;
-                $persona = session("persona");
-                $_data = DB::select("SELECT * FROM `Inscritos` WHERE Id_persona =  $persona and id_acto = $Id_acto");
+                $persona = session("id_persona");
+                $_data = DB::select("SELECT * FROM `Inscritos` WHERE Id_persona =  $persona and Id_acto = $Id_acto");
 
                 if(!empty($_data))
                 {
@@ -138,7 +138,7 @@ class PonenteController extends Controller
             $values ="$persona, $Id_acto,'$date'";
         }
 
-        $is_exist = DB::Select("Select * FROM $table WHERE Id_persona = $persona and id_acto = $Id_acto");
+        $is_exist = DB::Select("Select * FROM $table WHERE Id_persona = $persona and Id_acto = $Id_acto");
         $is_exist = current($is_exist);
 
 

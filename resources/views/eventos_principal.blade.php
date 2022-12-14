@@ -7,6 +7,9 @@
 				<th scope="col">NOMBRE VISTA CORRECTA</th>
 				<th scope="col">FECHA DEL ACTO</th>
 				<th scope="col">HORA DEL ACTO</th>
+				@auth
+					<th scope="col">INSCRITO</th>
+				@endauth
 				<th scope="col">EVENTO</th>
 			</tr>
 		</thead>
@@ -18,6 +21,16 @@
 				<td>{{ $acto->Titulo }}</td>
 				<td>{{ $acto->Fecha }}</td>
 				<td>{{ $acto->Hora }}</td>
+				@auth
+    				@php
+    					$datosBoton = App\Http\Controllers\ActoController::colorButtonInscribirse($acto->Id_acto);
+    				@endphp
+    				@if ($datosBoton === null)
+                		<td>NO</td>
+                	@else
+                    	<td>SI</td>
+                    @endif
+                @endauth
 				<td><form action="{{ action('App\Http\Controllers\ActoController@mostrarEvento') }}" method="POST">
 						@csrf
 						<input name="id_acto" type="hidden" value="{{ $acto->Id_acto }}">
