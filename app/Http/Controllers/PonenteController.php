@@ -39,12 +39,7 @@ class PonenteController extends Controller
                 
                 $Id_acto = $acto->Id_acto;
                 $persona = session("id_persona");
-<<<<<<< HEAD
-                $_data = DB::select("SELECT * FROM `Inscritos` WHERE Id_persona =  $persona and Id_acto = $Id_acto");
-=======
                 $_data = DB::select("SELECT * FROM `Inscritos` WHERE Id_persona =  $persona and id_acto = $Id_acto");
->>>>>>> 3b3d9fef7c367e796ba6dbbf4f64a271ec847c5e
-
                 if(!empty($_data))
                 {
                     $_data = current($_data);
