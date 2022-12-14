@@ -224,38 +224,39 @@ class ActoController extends Controller
     }
 
     public function apiGetActo(Request $request){
-        $acto= Acto::findOrFail($request->id);
+        $acto= DB::table('Actos')->where('Id_acto', '=', $request->id)->get();
         return $acto;
     }
 
     public function apiCreateActo(Request $request){
         $acto= new Acto;
-        $acto->Fecha= $request->fecha;
-        $acto->Hora= $request->hora;
-        $acto->Titulo= $request->titulo;
-        $acto->Descripcion_corta= $request->descripcionc;
-        $acto->Descripcion_larga= $request->descripcionl;
-        $acto->Num_asistentes= $request->nasistentes;
-        $acto->Id_tipo_acto= $request->tipo_acto;
+        $acto->Fecha= $request->Fecha;
+        $acto->Hora= $request->Hora;
+        $acto->Titulo= $request->Titulo;
+        $acto->Descripcion_corta= $request->Descripcion_corta;
+        $acto->Descripcion_larga= $request->Descripcion_larga;
+        $acto->Num_asistentes= $request->Num_asistentes;
+        $acto->Id_tipo_acto= $request->Id_tipo_acto;
         $acto->save();
         return $acto;
     }
 
     public function apiDeleteActo(Request $request){
-        $acto= Acto::destroy($request->id);
+        $acto= DB::table('Actos')->where('Id_Acto', '=', $request->id)->delete();
         return $acto;
     }
 
     public function apiUpdateActo(Request $request){
-        $acto= Acto::findOrFail($request->id);
-        $acto->Fecha= $request->fecha;
-        $acto->Hora= $request->hora;
-        $acto->Titulo= $request->titulo;
-        $acto->Descripcion_corta= $request->descripcionc;
-        $acto->Descripcion_larga= $request->descripcionl;
-        $acto->Num_asistentes= $request->nasistentes;
-        $acto->Id_tipo_acto= $request->tipo_acto;
-        $acto->save();
+        DB::table('Actos')->where('Id_acto', $request->id)->update([
+            'Fecha' => $request->Fecha,
+            'Hora' => $request->Hora,
+            'Titulo' => $request->Titulo,
+            'Descripcion_corta' => $request->Descripcion_corta,
+            'Descripcion_larga' => $request->Descripcion_larga,
+            'Num_asistentes' => $request->Num_asistentes,
+            'Id_tipo_acto' => $request->Id_tipo_acto                    
+        ]);
+        $acto= DB::table('Actos')->where('Id_acto', '=', $request->id)->get();
         return $acto;
     }
 }

@@ -64,6 +64,13 @@ Route::get('/event_file', [PonenteController::class, 'event_file'])->middleware(
 Route::post('/event_file', [PonenteController::class, 'event_file_save'])->middleware('ValidateRequest');
 Route::post('/updateOrder', [PonenteController::class, 'updateOrder'])->middleware('ValidateRequest');
 
+//rutas de la api
+Route::get('/api/acto/getAll', [ActoController::class, 'apiGetActos']);
+//Route::get('/api/acto/getOne', [ActoController::class, 'apiGetActo']);
+//Route::put('/api/acto/update', [ActoController::class, 'apiUpdateActo']);
+//Route::post('/api/acto/create', [ActoController::class, 'apiCreateActo']);
+//Route::delete('/api/acto/delete', [ActoController::class, 'apiDeleteActo']);
+
 
 //si no recibe datos
 Route::get('/welcome', function () {
