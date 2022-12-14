@@ -18,7 +18,7 @@ class ActoController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->input('mostrarVista')===null or $request->input('mostrarVista')==='3') {
+        /* if ($request->input('mostrarVista')===null or $request->input('mostrarVista')==='3') {
             $botonClicado = $request->input('mostrarVista');
             $currentMonth = date('m');
             $actos = DB::table("Actos")
@@ -38,10 +38,11 @@ class ActoController extends Controller
             $actos = Acto::query()
             ->where('Fecha', '=', $dia)
             ->get();
-        }
+        } */
         
+        $actos = DB::table("Actos")->orderBy('fecha', 'asc')->get();
         //return View::make('usuario')->with('actos', $actos);
-        return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]);
+        return view('eventos_principal', ['actos' => $actos]);
     }
     
     public function vistaInicial(Request $request)
@@ -172,7 +173,7 @@ class ActoController extends Controller
         
         $actos = Acto::get();
         //return view('usuario', ['actos' => $actos, 'botonClicado' => $botonClicado]);
-        return redirect('usuario'); 
+        return redirect('eventos_principal'); 
     }
     
     public static function mostrarEvento(Request $request)
