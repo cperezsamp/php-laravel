@@ -16,6 +16,7 @@ class PonenteController extends Controller
 
     function index()
     {
+        //dd(session()->all());
         if (session("tipoVista") == "3") {
             $this->data = DB::select("SELECT * FROM Actos WHERE MONTHNAME(FECHA) = MONTHNAME(SYSDATE())");
             $this->tipoVistaColorXmes = "btn btn-success";
@@ -38,7 +39,11 @@ class PonenteController extends Controller
                 
                 $Id_acto = $acto->Id_acto;
                 $persona = session("id_persona");
+<<<<<<< HEAD
                 $_data = DB::select("SELECT * FROM `Inscritos` WHERE Id_persona =  $persona and Id_acto = $Id_acto");
+=======
+                $_data = DB::select("SELECT * FROM `Inscritos` WHERE Id_persona =  $persona and id_acto = $Id_acto");
+>>>>>>> 3b3d9fef7c367e796ba6dbbf4f64a271ec847c5e
 
                 if(!empty($_data))
                 {
@@ -117,7 +122,7 @@ class PonenteController extends Controller
     {
         $msg = "";
         $Id_acto = $req->id_acto;
-        $persona = session("persona");
+        $persona = session("id_persona");
 
         $table= "";
         $colums= "";
@@ -183,7 +188,7 @@ class PonenteController extends Controller
 
     function profile()
     {
-        $persona = session("persona");
+        $persona = session("id_persona");
         $data =DB::Select(" 
                                     Select * from Personas p 
                                     inner join Usuarios u on u.Id_Persona = p.Id_persona  WHERE p.Id_persona = $persona");
@@ -201,7 +206,7 @@ class PonenteController extends Controller
             
         ]);
         $id = $req->id;
-        $persona = session("persona");
+        $persona = session("id_persona");
         $Nombre = $req->Nombre;
         $Apellido1 =$req->Apellido1;
         $Apellido2 = $req->Apellido2;
@@ -230,5 +235,80 @@ class PonenteController extends Controller
         
 
         return redirect("/user-profile");
+    }
+
+
+    function event_file()
+    {
+        //only Speakr or admin can do that
+        if(session("Id_tipo_usuario") &&  (session("Id_tipo_usuario") == "1" || session("Id_tipo_usuario") == "3" ) )
+        {
+            $user_id = session("id_persona");
+
+            $files = [];
+
+            if(session("Id_tipo_usuario") == "1")
+            {
+                $files = DB::select("select af.*,a.Titulo as title from Documentacion af 
+                inner join Actos a on a.Id_acto = af.Id_acto 
+                ORDER By a.Titulo ASC , af.Orden ASC");
+            }
+            else
+            {
+                $files = DB::select("select af.*,a.Titulo as title from Documentacion af 
+                inner join Actos a on a.Id_acto = af.Id_acto 
+                WHERE Id_persona =$user_id
+                ORDER By a.Titulo ASC , af.Orden ASC");
+            }
+            
+            //dd($files);
+            return view("actos_file")
+                ->with("events",DB::select("Select * from Actos WHERE FECHA  < DATE_FORMAT(SYSDATE(), '%Y-%m-%d')"))
+                ->with("files",$files);
+        }
+        return back();
+    }
+
+    function event_file_save(Request $req)
+    {
+        $error = [];
+        if(!empty($req->file('files')))
+        {
+            foreach($req->file('files') as $file)
+            {
+                $ext = $file->getClientOriginalExtension();
+                if($ext == "pdf")
+                {
+                    $file_path = $file->store("","local_custom");
+                    DB::table('Documentacion')->insert([
+                        'Localizacion_documentacion' => $file_path,
+                        'Id_acto' => $req->event_id,
+                        "Id_persona" => session("id_persona"),
+                        "Orden" => "1",
+                        "Titulo_documento" => $file->getClientOriginalName()
+                    ]);
+                }
+                else
+                {
+                    $error[] = $file->getClientOriginalName() . " should be PDF file";
+                }
+            }
+        }
+        return redirect("event_file")->with("error",$error);
+    }
+
+    function updateOrder(Request $req)
+    {
+        $obj = DB::table("Documentacion")->where("Id_persona",$req->id);
+        if(!empty($obj))
+        {
+            DB::table('Documentacion')
+            ->where("Id_presentacion",$req->id)
+            ->update([
+                "Orden" => $req->order
+            ]);
+            echo "updated";
+        }
+        echo "not";
     }
 }

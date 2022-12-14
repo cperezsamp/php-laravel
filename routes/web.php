@@ -60,6 +60,9 @@ Route::post('/event_detail', [PonenteController::class, 'event_detail'])->middle
 Route::post('/removeSpeaker', [PonenteController::class, 'removeSpeaker'])->middleware('ValidateRequest');
 Route::get('/user-profile', [PonenteController::class, 'profile'])->middleware('ValidateRequest');
 Route::post('/update_profile', [PonenteController::class, 'update_profile'])->middleware('ValidateRequest');
+Route::get('/event_file', [PonenteController::class, 'event_file'])->middleware('ValidateRequest');
+Route::post('/event_file', [PonenteController::class, 'event_file_save'])->middleware('ValidateRequest');
+Route::post('/updateOrder', [PonenteController::class, 'updateOrder'])->middleware('ValidateRequest');
 
 
 //si no recibe datos
