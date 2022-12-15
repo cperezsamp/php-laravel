@@ -36,7 +36,7 @@
 				</form>
            @else
            		<form action="{{ action('App\Http\Controllers\ActoController@inscribirseBorrarse') }}" method="POST">
-        	@csrf
+        			@csrf
 					<input name="id_acto" type="hidden" value="{{ $a->Id_acto }}">
 					<input name="id_persona" type="hidden" value="{{ session('id_persona') }}">
 					<button type="submit" name="inscribirBorrar" value="borrarse" class="btn btn-warning">Borrarse</button>
@@ -44,7 +44,7 @@
            @endif
            @endauth
            @guest
-           <form action="{{ action('App\Http\Controllers\ActoController@doLogin') }}" method="POST">
+           <form action="{{ action('App\Http\Controllers\ActoController@doLogin') }}" method="GET">
            @csrf 
            <button type="submit" name="logearse" class="btn btn-success">Logearse</button>
            </form>

@@ -60,14 +60,14 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return to_route('login');
+        return to_route('eventos_principal');
 
     }
 
     public function logout(){
         
         auth()->logout();
-        return redirect('/login');
+        return redirect('/eventos_principal');
     }
     
 }

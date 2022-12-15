@@ -29,7 +29,7 @@ Route::view('/login', 'login') ->name('login');
 Route::get('/eventos_principal', [ActoController::class, 'vistaInicial']);
 Route::get('/', [ActoController::class, 'index']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('log');
-Route::post('/log', [ActoController::class, 'doLogin'])->name('doLog');
+Route::get('/log', [ActoController::class, 'doLogin'])->name('doLog');
 //Route::get('/usuario', [ActoController::class, 'index']) ->name('usuario')->middleware('auth');
 Route::get('/registro', [UsuarioController::class, 'create']) ->name('usuario.create');
 Route::post('/registro', [UsuarioController::class, 'store']) ->name('usuario.crea');
@@ -38,6 +38,7 @@ Route::post('/verEvento', [ActoController::class, 'mostrarEvento']) ->name('verE
 Route::get('/profile', [UsuarioController::class, 'edit']) ->name('usuario.update')->middleware('auth');
 Route::post('/profile', [UsuarioController::class, 'update'])->name('usuario.upd')->middleware('auth');
 Route::get('/logout', [AuthenticatedSessionController::class, 'logout']) ->name('logout')->middleware('auth');
+Route::get('/destroy', [AuthenticatedSessionController::class, 'destroy']) ->name('destroy')->middleware('auth');
 
 Route::get('/admin', [ActoController::class, 'admin']) ->name('admin');
 Route::get('/crearacto', [ActoController::class, 'create']) ->name('crearacto');

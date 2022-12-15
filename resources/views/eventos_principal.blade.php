@@ -4,7 +4,7 @@
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col">NOMBRE VISTA CORRECTA</th>
+				<th scope="col">NOMBRE DEL ACTO</th>
 				<th scope="col">FECHA DEL ACTO</th>
 				<th scope="col">HORA DEL ACTO</th>
 				@auth
