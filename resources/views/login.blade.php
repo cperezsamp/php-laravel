@@ -11,6 +11,9 @@
     <title>Gestor de Eventos Laravel</title>
 </head>
 <body>
+    <script>
+        console.log({{ session('username') }});
+    </script>
     <div class="bd-example m-5">
         <div class= "d-flex justify-content-center bd-highlight mb-3">
             <div class="card p-5">

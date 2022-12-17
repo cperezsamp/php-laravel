@@ -65,9 +65,14 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function logout(){
-        
+        session()->forget('rol');
+        session()->forget('id_usuario');
+        session()->forget('username');
+        session()->forget('id_persona');
+        session()->forget('Id_tipo_usuario');
+        session()->forget('tipo_vista');    
         auth()->logout();
-        return redirect('/eventos_principal');
+        return redirect('/');
     }
     
 }

@@ -1,6 +1,6 @@
 <x-layout.header> 
 @if (session('rol') == 'Usuario')
-<script>window.location = "/usuario";</script>
+<script>window.location = "/";</script>
 @endif
 
     <div align="center">
@@ -69,6 +69,5 @@
             </tbody>
         </table>
     </div>
-
-</x-layout.header> 
+</x-layout.header>
 <x-layout.footer></x-layout.footer>
