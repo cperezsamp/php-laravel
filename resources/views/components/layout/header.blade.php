@@ -11,15 +11,18 @@
     <title>Gestor de Eventos</title>
 </head>
 <body>
+    @auth
     <a href="{{ url('/logout')}}" style= 'text-align: right'><p>Cerrar sesion</p></a>
     <a title="Ir al perfil" href="{{ URL('user-profile') }}" style= 'text-align: right'><p>{{ session('username') }}</p></a><br>
+    @endauth
 
     
     
-   
+    @auth
     @if(session("Id_tipo_usuario") &&  (session("Id_tipo_usuario") == "1" || session("Id_tipo_usuario") == "3") )
 
         <a title="Ir al perfil" href="{{ URL('event_file') }}" style= 'text-align: right'><p>Events File</p></a><br>
     @endif
+    @endauth
 
 {{ $slot }}
