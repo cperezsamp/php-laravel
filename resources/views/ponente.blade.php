@@ -1,8 +1,8 @@
-@extends("layout.layout")
+<x-layout.header> 
 @if (session('rol') == 'Usuario')
 <script>window.location = "/usuario";</script>
 @endif
-@section("content")
+
     <div align="center">
         <form action="{{ URL('/hanldeButton') }}" method="post">
             @csrf()
@@ -69,4 +69,6 @@
             </tbody>
         </table>
     </div>
-@endsection
+
+</x-layout.header> 
+<x-layout.footer></x-layout.footer>
