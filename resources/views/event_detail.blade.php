@@ -1,6 +1,4 @@
-@extends("layout.layout")
-
-@section("content")
+<x-layout.header> 
 
 <tr>
 
@@ -40,4 +38,5 @@
     </td>
 </tr>
 
-@endsection
+</x-layout.header> 
+<x-layout.footer></x-layout.footer>

@@ -1,6 +1,5 @@
-@extends("layout.layout")
+<x-layout.header> 
 
-@section("content")
  <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 <style type="text/css">
   table tbody tr:hover {
@@ -100,4 +99,5 @@
   </div>
 </div>
 
-@endsection
+</x-layout.header> 
+<x-layout.footer></x-layout.footer>

@@ -1,6 +1,4 @@
-@extends("layout.layout")
-
-@section("content")
+<x-layout.header> 
 
 <div class="container">
 
@@ -59,4 +57,5 @@
 </div>
 
 
-@endsection
+</x-layout.header> 
+<x-layout.footer></x-layout.footer>
